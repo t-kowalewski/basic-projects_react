@@ -1,4 +1,3 @@
-// import React from 'react';
 import React, { useState } from 'react';
 import data from './data';
 
@@ -10,7 +9,7 @@ const List = () => {
   };
 
   return (
-    <section className='container'>
+    <>
       <h3>{people.length} birthdays today</h3>
 
       {people.map((person) => {
@@ -18,7 +17,7 @@ const List = () => {
 
         return (
           <article className='person' key={id}>
-            <img src={image} />
+            <img src={image} alt={name} />
             <div>
               <h4>{name}</h4>
               <p>{age} years</p>
@@ -28,7 +27,7 @@ const List = () => {
       })}
 
       <button onClick={clearListHandler}>Clear list</button>
-    </section>
+    </>
   );
 };
 
