@@ -38,14 +38,7 @@ function App() {
   } else {
     return (
       <main>
-        <section>
-          <div className='title'>
-            <h2>Our Tours</h2>
-            <div className='underline'></div>
-          </div>
-
-          <Tours tours={tours} />
-        </section>
+        <Tours tours={tours} />
       </main>
     );
   }
