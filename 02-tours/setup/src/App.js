@@ -8,7 +8,6 @@ const url = 'https://course-api.com/react-tours-project';
 function App() {
   const [isLoading, setIsLoading] = useState(true);
   const [tours, setTours] = useState([]);
-  // const [is]
 
   const getTours = async (url) => {
     try {
@@ -35,10 +34,28 @@ function App() {
         <Loading />
       </main>
     );
+  } else if (tours.length === 0) {
+    return (
+      <main>
+        <div className='title'>
+          <h2>No Tours Left</h2>
+          <div className='underline'></div>
+
+          <button
+            className='btn'
+            onClick={() => {
+              getTours(url);
+            }}
+          >
+            Refresh
+          </button>
+        </div>
+      </main>
+    );
   } else {
     return (
       <main>
-        <Tours tours={tours} />
+        <Tours tours={tours} setTours={setTours} />
       </main>
     );
   }
