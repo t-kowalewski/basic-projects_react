@@ -30,7 +30,11 @@ function App() {
   }, []);
 
   if (isLoading) {
-    return <Loading />;
+    return (
+      <main>
+        <Loading />
+      </main>
+    );
   } else {
     return (
       <main>
