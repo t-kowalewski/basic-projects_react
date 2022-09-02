@@ -5,7 +5,29 @@ import data from './data';
 
 function App() {
   const [people, setPeople] = useState(data);
-  const [index, setIndex] = useState(0);
+  const [activeIndex, setActiveIndex] = useState(0);
+
+  const next = () => {
+    setActiveIndex((currIndex) =>
+      ++currIndex > people.length - 1 ? 0 : currIndex
+    );
+  };
+
+  const prev = () => {
+    setActiveIndex((currIndex) =>
+      --currIndex < 0 ? people.length - 1 : currIndex
+    );
+  };
+
+  useEffect(() => {
+    const myTimeout = setTimeout(() => {
+      next();
+    }, 5000);
+
+    return () => {
+      clearTimeout(myTimeout);
+    };
+  });
 
   return (
     <section className='section'>
@@ -23,11 +45,11 @@ function App() {
             <article
               key={id}
               className={
-                ind === index
+                ind === activeIndex
                   ? 'activeSlide'
-                  : index === 0 && ind === people.length - 1
+                  : activeIndex === 0 && ind === people.length - 1
                   ? 'lastSlide'
-                  : ind === index - 1
+                  : ind === activeIndex - 1
                   ? 'lastSlide'
                   : 'nextSlide'
               }
@@ -41,11 +63,11 @@ function App() {
           );
         })}
 
-        <button className='prev'>
+        <button className='prev' onClick={prev}>
           <FiChevronLeft />
         </button>
 
-        <button className='next'>
+        <button className='next' onClick={next}>
           <FiChevronRight />
         </button>
       </div>
