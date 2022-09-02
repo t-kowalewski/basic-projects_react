@@ -16,11 +16,22 @@ function App() {
       </div>
 
       <div className='section-center'>
-        {people.map((person, index) => {
+        {people.map((person, ind) => {
           const { id, image, name, title, quote } = person;
 
           return (
-            <article key={id}>
+            <article
+              key={id}
+              className={
+                ind === index
+                  ? 'activeSlide'
+                  : index === 0 && ind === people.length - 1
+                  ? 'lastSlide'
+                  : ind === index - 1
+                  ? 'lastSlide'
+                  : 'nextSlide'
+              }
+            >
               <img src={image} alt={name} className='person-img' />
               <h4>{name}</h4>
               <p className='title'>{title}</p>
