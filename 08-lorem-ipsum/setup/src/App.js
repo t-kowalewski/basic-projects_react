@@ -16,10 +16,13 @@ function App() {
       <h3>lorem ipsum generator</h3>
 
       <form className='lorem-form'>
-        <label htmlFor='paragraphSelector'>Paragraphs</label>
+        <label htmlFor='paragraphAmount'>Paragraphs</label>
         <input
           type='number'
           min='0'
+          max={data.length.toString()}
+          id='paragraphAmount'
+          name='paragraphAmount'
           value={amount}
           onChange={(e) => {
             setAmount(e.target.value);
@@ -31,9 +34,9 @@ function App() {
         </button>
       </form>
 
-      <article className='lorem-article'>
-        {paragraphs.map((paragraph) => {
-          return <p key={new Date().getTime().toString()}>{paragraph}</p>;
+      <article className='lorem-text'>
+        {paragraphs.map((paragraph, i) => {
+          return <p key={i}>{paragraph}</p>;
         })}
       </article>
     </section>
