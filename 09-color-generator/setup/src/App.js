@@ -10,8 +10,15 @@ function App() {
 
   const submitHandler = (e) => {
     e.preventDefault();
-
     console.log('Submited!');
+
+    try {
+      const colors = new Values(hexColor).all(10);
+      console.log(colors);
+    } catch (err) {
+      setIsError(true);
+      console.log(err);
+    }
   };
 
   return (
@@ -26,6 +33,7 @@ function App() {
             id='color'
             placeholder='#71a507'
             value={hexColor}
+            className={isError ? 'error' : null}
             onChange={(e) => {
               setHexColor(e.target.value);
             }}
@@ -35,10 +43,6 @@ function App() {
             Submit
           </button>
         </form>
-
-        <section>
-          <article></article>
-        </section>
       </section>
 
       <section className='colors'>
