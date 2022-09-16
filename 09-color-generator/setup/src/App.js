@@ -13,7 +13,8 @@ function App() {
 
     try {
       const colors = new Values(hexColor).all(10);
-      console.log(colors);
+      // console.log(colors);
+      setIsError(false);
       setColorsList(colors);
     } catch (err) {
       setIsError(true);
@@ -47,7 +48,7 @@ function App() {
 
       <section className='colors'>
         {colorsList.map((color, index) => {
-          return <SingleColor key={index} {...color} />;
+          return <SingleColor key={index} hex={color.hex} {...color} />;
         })}
       </section>
     </>
