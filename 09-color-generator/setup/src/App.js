@@ -10,11 +10,11 @@ function App() {
 
   const submitHandler = (e) => {
     e.preventDefault();
-    console.log('Submited!');
 
     try {
       const colors = new Values(hexColor).all(10);
       console.log(colors);
+      setColorsList(colors);
     } catch (err) {
       setIsError(true);
       console.log(err);
@@ -46,7 +46,9 @@ function App() {
       </section>
 
       <section className='colors'>
-        <h4>list goes here</h4>
+        {colorsList.map((color, index) => {
+          return <SingleColor key={index} {...color} />;
+        })}
       </section>
     </>
   );
