@@ -6,7 +6,7 @@ import Values from 'values.js';
 function App() {
   const [hexColor, setHexColor] = useState('');
   const [isError, setIsError] = useState(false);
-  const [colorsList, setColorsList] = useState([]);
+  const [colorsList, setColorsList] = useState(new Values('#71a507').all(10));
 
   const submitHandler = (e) => {
     e.preventDefault();
