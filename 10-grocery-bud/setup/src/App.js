@@ -9,10 +9,29 @@ function App() {
   const [editID, setEditID] = useState(null);
   const [alert, setAlert] = useState({ show: false, msg: '', type: '' });
 
+  console.log(productsList);
+
   const submitHandler = (e) => {
     e.preventDefault();
 
-    console.log('Submitted!');
+    if (productInput.trim().length > 0 && !isEditing) {
+      // show alert - added
+
+      const newItem = {
+        id: new Date().getTime().toString(),
+        name: productInput.trim(),
+      };
+
+      setProductsList((currState) => {
+        return [...currState, newItem];
+      });
+      setProductInput('');
+    } else if (productInput.trim().length > 0 && isEditing) {
+      // deal with edit
+    } else {
+      // show alert
+      setAlert({ show: true, msg: 'Please enter correct value', type: '' });
+    }
   };
 
   return (
@@ -37,10 +56,12 @@ function App() {
         </div>
       </form>
 
-      <div className='grocery-container'>
-        <List />
-        <button className='clear-btn'>Clear list</button>
-      </div>
+      {productsList.length > 0 && (
+        <div className='grocery-container'>
+          <List items={productsList} />
+          <button className='clear-btn'>Clear list</button>
+        </div>
+      )}
     </section>
   );
 }
