@@ -9,7 +9,7 @@ const Alert = ({ alertInfo, showAlert }) => {
     }, 3000);
 
     return () => clearTimeout(myTimeout);
-  }, []);
+  });
 
   return <p className={`alert alert-${type}`}>{msg}</p>;
 };

@@ -40,6 +40,13 @@ function App() {
     }
   };
 
+  const delItem = (id) => {
+    setProductsList((currState) => {
+      return currState.filter((item) => item.id !== id);
+    });
+    showAlert(true, 'Item removed', 'danger');
+  };
+
   const clearList = () => {
     setProductsList([]);
     showAlert(true, 'List Cleared', 'danger');
@@ -69,7 +76,8 @@ function App() {
 
       {productsList.length > 0 && (
         <div className='grocery-container'>
-          <List items={productsList} />
+          <List items={productsList} delItem={delItem} />
+
           <button className='clear-btn' onClick={clearList}>
             Clear list
           </button>
