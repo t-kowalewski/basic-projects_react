@@ -13,7 +13,6 @@ function App() {
     type: '', // 'success' or 'danger'
   });
 
-  // console.log(productsList);
   const showAlert = (show = false, msg = '', type = '') => {
     setAlert({ show, msg, type });
   };
@@ -22,6 +21,7 @@ function App() {
     e.preventDefault();
 
     if (productInput.trim().length > 0 && !isEditing) {
+      // add item
       const newItem = {
         id: new Date().getTime().toString(),
         name: productInput.trim(),
@@ -33,10 +33,30 @@ function App() {
       setProductInput('');
       showAlert(true, 'Item added', 'success');
     } else if (productInput.trim().length > 0 && isEditing) {
-      // deal with edit
+      // edit item
+      setProductsList((currState) => {
+        return currState.map((item) => {
+          return item.id === editID
+            ? { ...item, name: productInput.trim() }
+            : item;
+        });
+      });
+
+      setIsEditing(false);
+      setEditID(null);
+      setProductInput('');
       showAlert(true, 'Item updated', 'success');
     } else {
       showAlert(true, 'Please enter correct value', 'danger');
+    }
+  };
+
+  const editItem = (id) => {
+    const editedItem = productsList.find((item) => item.id === id);
+    if (editedItem) {
+      setIsEditing(true);
+      setProductInput(editedItem.name);
+      setEditID(editedItem.id);
     }
   };
 
@@ -76,7 +96,7 @@ function App() {
 
       {productsList.length > 0 && (
         <div className='grocery-container'>
-          <List items={productsList} delItem={delItem} />
+          <List items={productsList} delItem={delItem} editItem={editItem} />
 
           <button className='clear-btn' onClick={clearList}>
             Clear list
