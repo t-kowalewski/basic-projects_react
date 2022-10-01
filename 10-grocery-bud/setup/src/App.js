@@ -3,7 +3,9 @@ import List from './List';
 import Alert from './Alert';
 
 function App() {
-  const [productsList, setProductsList] = useState([]);
+  const [productsList, setProductsList] = useState(
+    JSON.parse(localStorage.getItem('productsList')) || []
+  );
   const [productInput, setProductInput] = useState('');
   const [isEditing, setIsEditing] = useState(false);
   const [editID, setEditID] = useState(null);
@@ -13,10 +15,12 @@ function App() {
     type: '', // 'success' or 'danger'
   });
 
+  // alert logic
   const showAlert = (show = false, msg = '', type = '') => {
     setAlert({ show, msg, type });
   };
 
+  // submit handler
   const submitHandler = (e) => {
     e.preventDefault();
 
@@ -51,6 +55,7 @@ function App() {
     }
   };
 
+  // edit item
   const editItem = (id) => {
     const editedItem = productsList.find((item) => item.id === id);
     if (editedItem) {
@@ -60,6 +65,7 @@ function App() {
     }
   };
 
+  // delete itme
   const delItem = (id) => {
     setProductsList((currState) => {
       return currState.filter((item) => item.id !== id);
@@ -67,10 +73,16 @@ function App() {
     showAlert(true, 'Item removed', 'danger');
   };
 
+  // clear list
   const clearList = () => {
     setProductsList([]);
     showAlert(true, 'List Cleared', 'danger');
   };
+
+  // save data to local storage
+  useEffect(() => {
+    localStorage.setItem('productsList', JSON.stringify(productsList));
+  }, [productsList]);
 
   return (
     <section className='section-center'>
