@@ -1,21 +1,56 @@
-import React, { useState, useRef, useEffect } from 'react';
+import React, { useState, useRef, useEffect, useLayoutEffect } from 'react';
 import { FaBars, FaTwitter } from 'react-icons/fa';
 import { links, social } from './data';
 import logo from './logo.svg';
 
 const Navbar = () => {
+  const [showMobileLinks, setShowMobileLinks] = useState(false);
+
+  const linksRefContainer = useRef(null);
+  const linksRef = useRef(null);
+
+  useEffect(() => {
+    console.log(linksRefContainer.current);
+
+    // Outputs height 0 when mobile menu is extended
+    console.log(linksRefContainer.current.getBoundingClientRect());
+
+    //   ///// Final version - lecture
+
+    //   // const linksSize = linksRef.current.getBoundingClientRect();
+    //   // console.log(linksSize);
+
+    //   // if (showMobileLinks) {
+    //   //   linksRefContainer.current.style.height = linksSize.height + 'px';
+    //   // } else {
+    //   //   linksRefContainer.current.style.height = '0';
+    //   // }
+    // }, [showMobileLinks]);
+  }, [showMobileLinks]);
+
+  const togleMenuHandler = () => {
+    setShowMobileLinks(!showMobileLinks);
+  };
+
   return (
     <nav>
       <div className='nav-center'>
         <div className='nav-header'>
           <img src={logo} alt='logo' />
-          <button className='nav-toggle'>
+          <button className='nav-toggle' onClick={togleMenuHandler}>
             <FaBars />
           </button>
         </div>
 
-        <div className='links-container show-container'>
-          <ul className='links'>
+        <div
+          className={
+            showMobileLinks
+              ? 'links-container show-container'
+              : 'links-container'
+          }
+          ref={linksRefContainer}
+        >
+          <ul className='links' ref={linksRef}>
             {links.map((link) => {
               const { id, url, text } = link;
               return (
