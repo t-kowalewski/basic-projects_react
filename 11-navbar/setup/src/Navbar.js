@@ -12,20 +12,13 @@ const Navbar = () => {
   useEffect(() => {
     console.log(linksRefContainer.current);
 
-    // Outputs height 0 when mobile menu is extended
-    console.log(linksRefContainer.current.getBoundingClientRect());
+    const linksSize = linksRef.current.getBoundingClientRect();
 
-    //   ///// Final version - lecture
-
-    //   // const linksSize = linksRef.current.getBoundingClientRect();
-    //   // console.log(linksSize);
-
-    //   // if (showMobileLinks) {
-    //   //   linksRefContainer.current.style.height = linksSize.height + 'px';
-    //   // } else {
-    //   //   linksRefContainer.current.style.height = '0';
-    //   // }
-    // }, [showMobileLinks]);
+    if (showMobileLinks) {
+      linksRefContainer.current.style.height = linksSize.height + 'px';
+    } else {
+      linksRefContainer.current.style.height = '0';
+    }
   }, [showMobileLinks]);
 
   const togleMenuHandler = () => {
