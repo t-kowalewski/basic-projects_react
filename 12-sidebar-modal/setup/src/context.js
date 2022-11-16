@@ -3,7 +3,16 @@ import React, { useState, useContext } from 'react';
 const AppContext = React.createContext();
 
 const AppProvider = ({ children }) => {
-  return <AppContext.Provider value='hello'>{children}</AppContext.Provider>;
+  const [sidebarIsOpen, setSidebarIsOpen] = useState(false);
+  const [modalIsOpen, setModalIsOpen] = useState(false);
+
+  return (
+    <AppContext.Provider
+      value={{ sidebarIsOpen, setSidebarIsOpen, modalIsOpen, setModalIsOpen }}
+    >
+      {children}
+    </AppContext.Provider>
+  );
 };
 
 // custom hook
