@@ -19,7 +19,6 @@ const Navbar = () => {
 
         <ul className='nav-links'>
           {data.map((item, index) => {
-            // console.log(index);
             return (
               <li key={index}>
                 <button className='link-btn'>{item.page}</button>
