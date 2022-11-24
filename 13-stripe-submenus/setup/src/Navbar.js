@@ -7,6 +7,11 @@ import data from './data';
 const Navbar = () => {
   const { toggleSubmenu, toggleSidebar } = useGlobalContext();
 
+  const showSubmenu = (e) => {
+    console.log('Its working!');
+    toggleSubmenu();
+  };
+
   return (
     <nav className='nav'>
       <div className='nav-center'>
@@ -21,7 +26,9 @@ const Navbar = () => {
           {data.map((item, index) => {
             return (
               <li key={index}>
-                <button className='link-btn'>{item.page}</button>
+                <button className='link-btn' onMouseOver={showSubmenu}>
+                  {item.page}
+                </button>
               </li>
             );
           })}
