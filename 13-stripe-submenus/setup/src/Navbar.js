@@ -5,11 +5,16 @@ import { useGlobalContext } from './context';
 import data from './data';
 
 const Navbar = () => {
-  const { toggleSubmenu, toggleSidebar } = useGlobalContext();
+  const { openSubmenu, toggleSidebar } = useGlobalContext();
 
   const showSubmenu = (e) => {
-    console.log('Its working!');
-    toggleSubmenu();
+    const page = e.target.textContent;
+    const elLocation = e.target.getBoundingClientRect();
+    const center = elLocation.right - elLocation.width / 2;
+    const bottom = elLocation.bottom - 3;
+    console.log(elLocation);
+    console.log(page);
+    openSubmenu(page, { center, bottom });
   };
 
   return (

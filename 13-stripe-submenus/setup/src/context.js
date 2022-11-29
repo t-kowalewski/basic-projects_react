@@ -6,6 +6,7 @@ const AppConetex = React.createContext();
 export const AppProvider = ({ children }) => {
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
   const [isSubmenuOpen, setIsSubmenuOpen] = useState(false);
+  const [location, setLocation] = useState({});
 
   // const openSidebar = () => {
   //   setIsSidebarOpen(true);
@@ -13,13 +14,23 @@ export const AppProvider = ({ children }) => {
   const toggleSidebar = () => {
     setIsSidebarOpen((currState) => !currState);
   };
-  const toggleSubmenu = () => {
-    setIsSubmenuOpen((currState) => !currState);
+  // const toggleSubmenu = () => {
+  //   setIsSubmenuOpen((currState) => !currState);
+  // };
+  const openSubmenu = (page, coordinates) => {
+    setLocation(coordinates);
+    setIsSubmenuOpen(true);
   };
 
   return (
     <AppConetex.Provider
-      value={{ isSidebarOpen, isSubmenuOpen, toggleSidebar, toggleSubmenu }}
+      value={{
+        isSidebarOpen,
+        isSubmenuOpen,
+        location,
+        toggleSidebar,
+        openSubmenu,
+      }}
     >
       {children}
     </AppConetex.Provider>
