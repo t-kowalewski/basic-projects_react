@@ -12,8 +12,8 @@ const Navbar = () => {
     const elLocation = e.target.getBoundingClientRect();
     const center = elLocation.right - elLocation.width / 2;
     const bottom = elLocation.bottom - 3;
-    console.log(elLocation);
-    console.log(page);
+    // console.log(elLocation);
+    // console.log(page);
     openSubmenu(page, { center, bottom });
   };
 

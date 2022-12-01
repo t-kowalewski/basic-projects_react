@@ -1,8 +1,9 @@
-import React, { useState, useRef, useEffect } from 'react';
+import React, { useRef, useEffect } from 'react';
 import { useGlobalContext } from './context';
 
 const Submenu = () => {
   const refContainer = useRef(null);
+
   const {
     isSubmenuOpen,
     location,
@@ -11,14 +12,10 @@ const Submenu = () => {
   } = useGlobalContext();
 
   useEffect(() => {
-    // console.log(refContainer.current);
     const { center, bottom } = location;
     refContainer.current.style.left = `${center}px`;
     refContainer.current.style.top = `${bottom}px`;
   }, [location]);
-
-  // console.log(selectedPage);
-  // console.log(page, links);
 
   return (
     <aside
@@ -28,7 +25,11 @@ const Submenu = () => {
     >
       <section>
         <h4>{page}</h4>
-        <div className={`submenu-center col-${links.length.toString()}`}>
+        <div
+          className={`submenu-center col-${
+            links.length === 3 ? '3' : links.length > 3 ? '4' : 2
+          }`}
+        >
           {links.map((item, index) => {
             const { label, icon, url } = item;
             return (

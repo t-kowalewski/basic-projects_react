@@ -9,15 +9,10 @@ export const AppProvider = ({ children }) => {
   const [location, setLocation] = useState({});
   const [selectedPage, setSelectedPage] = useState({ page: '', links: [] });
 
-  // const openSidebar = () => {
-  //   setIsSidebarOpen(true);
-  // };
   const toggleSidebar = () => {
     setIsSidebarOpen((currState) => !currState);
   };
-  // const toggleSubmenu = () => {
-  //   setIsSubmenuOpen((currState) => !currState);
-  // };
+
   const openSubmenu = (page, coordinates) => {
     setLocation(coordinates);
     setIsSubmenuOpen(true);
