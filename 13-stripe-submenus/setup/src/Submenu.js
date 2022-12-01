@@ -8,7 +8,6 @@ const Submenu = () => {
     isSubmenuOpen,
     location,
     selectedPage: { page, links },
-    closeSubmenu,
   } = useGlobalContext();
 
   useEffect(() => {
@@ -21,7 +20,6 @@ const Submenu = () => {
     <aside
       className={isSubmenuOpen ? 'submenu show' : 'submenu'}
       ref={refContainer}
-      onMouseLeave={closeSubmenu}
     >
       <section>
         <h4>{page}</h4>

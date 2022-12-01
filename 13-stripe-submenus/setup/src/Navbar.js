@@ -5,20 +5,24 @@ import { useGlobalContext } from './context';
 import data from './data';
 
 const Navbar = () => {
-  const { openSubmenu, toggleSidebar } = useGlobalContext();
+  const { openSubmenu, closeSubmenu, toggleSidebar } = useGlobalContext();
 
   const showSubmenu = (e) => {
     const page = e.target.textContent;
     const elLocation = e.target.getBoundingClientRect();
     const center = elLocation.right - elLocation.width / 2;
     const bottom = elLocation.bottom - 3;
-    // console.log(elLocation);
-    // console.log(page);
     openSubmenu(page, { center, bottom });
   };
 
+  const handleSubmenu = (e) => {
+    if (!e.target.classList.contains('link-btn')) {
+      closeSubmenu();
+    }
+  };
+
   return (
-    <nav className='nav'>
+    <nav className='nav' onMouseOver={handleSubmenu}>
       <div className='nav-center'>
         <div className='nav-header'>
           <img src={logo} alt='stripe' className='nav-logo' />
