@@ -15,17 +15,21 @@ const initState = {
 };
 
 const AppProvider = ({ children }) => {
-  // const [cart, setCart] = useState(cartItems);
   const [state, dispatch] = useReducer(reducer, initState);
 
   const clearCart = () => {
     dispatch({ type: 'CLEAR_CART' });
   };
 
+  const removeItem = (id) => {
+    dispatch({ type: 'REMOVE_ITEM', payload: id });
+  };
+
   return (
     <AppContext.Provider
       value={{
         ...state,
+        removeItem,
         clearCart,
       }}
     >
