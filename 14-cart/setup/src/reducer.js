@@ -33,11 +33,13 @@ const reducer = (state, action) => {
   if (action.type === 'DECREASE') {
     return {
       ...state,
-      cart: state.cart.map((item) => {
-        return item.id === action.payload
-          ? { ...item, amount: item.amount - 1 }
-          : item;
-      }),
+      cart: state.cart
+        .map((item) => {
+          return item.id === action.payload
+            ? { ...item, amount: item.amount - 1 }
+            : item;
+        })
+        .filter((item) => item.amount > 0),
     };
   }
 
