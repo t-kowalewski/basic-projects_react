@@ -40,11 +40,7 @@ const CartContainer = () => {
           </h4>
         </div>
 
-        <button
-          className='btn clear-btn'
-          // onClick={() => console.log('clear cart')}
-          onClick={clearCart}
-        >
+        <button className='btn clear-btn' onClick={clearCart}>
           clear cart
         </button>
       </footer>

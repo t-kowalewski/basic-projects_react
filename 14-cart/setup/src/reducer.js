@@ -9,23 +9,12 @@ const reducer = (state, action) => {
   }
 
   if (action.type === 'INCREASE') {
-    // const selectedProduct = state.cart.find(
-    //   (prod) => prod.id === action.payload
-    // );
-    // console.log(selectedProduct);
-
     return {
       ...state,
       cart: state.cart.map((item) => {
         return item.id === action.payload
           ? { ...item, amount: item.amount + 1 }
           : item;
-
-        // if (item.id === action.payload) {
-        //   return { ...item, amount: item.amount + 1 };
-        // } else {
-        //   return item;
-        // }
       }),
     };
   }
