@@ -36,10 +36,12 @@ const reducer = (state, action) => {
     return {
       ...state,
       amount: state.cart.reduce((acc, curVal) => acc + curVal.amount, 0),
-      total: state.cart.reduce(
-        (acc, curVal) => acc + curVal.price * curVal.amount,
-        0
-      ),
+      total: state.cart.reduce((acc, curVal) => {
+        const total = parseFloat(
+          (acc + curVal.price * curVal.amount).toFixed(2)
+        );
+        return total;
+      }, 0),
     };
   }
 
