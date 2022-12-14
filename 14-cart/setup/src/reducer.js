@@ -32,6 +32,17 @@ const reducer = (state, action) => {
     };
   }
 
+  if (action.type === 'GET_TOTALS') {
+    return {
+      ...state,
+      amount: state.cart.reduce((acc, curVal) => acc + curVal.amount, 0),
+      total: state.cart.reduce(
+        (acc, curVal) => acc + curVal.price * curVal.amount,
+        0
+      ),
+    };
+  }
+
   return state;
 };
 
