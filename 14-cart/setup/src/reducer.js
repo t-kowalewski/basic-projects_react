@@ -45,7 +45,13 @@ const reducer = (state, action) => {
     };
   }
 
-  return state;
+  if (action.type === 'DISPLAY_DATA') {
+    return {
+      ...state,
+      cart: action.payload,
+      loading: false,
+    };
+  }
 };
 
 export default reducer;

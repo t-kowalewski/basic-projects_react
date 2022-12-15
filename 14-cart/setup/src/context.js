@@ -8,8 +8,8 @@ const AppContext = React.createContext();
 
 // Initial State
 const initState = {
-  loading: false,
-  cart: cartItems,
+  loading: true,
+  cart: [],
   total: 0,
   amount: 0,
 };
@@ -32,6 +32,18 @@ const AppProvider = ({ children }) => {
   const decrease = (id) => {
     dispatch({ type: 'DECREASE', payload: id });
   };
+
+  const fetchData = (data) => {
+    fetch(data)
+      .then((resp) => resp.json())
+      .then((resp) => {
+        dispatch({ type: 'DISPLAY_DATA', payload: resp });
+      });
+  };
+
+  useEffect(() => {
+    fetchData(url);
+  }, []);
 
   useEffect(() => {
     dispatch({ type: 'GET_TOTALS' });
