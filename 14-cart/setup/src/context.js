@@ -1,5 +1,5 @@
 import React, { useState, useContext, useReducer, useEffect } from 'react';
-import cartItems from './data';
+// import cartItems from './data';
 import reducer from './reducer';
 // ATTENTION!!!!!!!!!!
 // I SWITCHED TO PERMANENT DOMAIN
@@ -25,13 +25,17 @@ const AppProvider = ({ children }) => {
     dispatch({ type: 'REMOVE_ITEM', payload: id });
   };
 
-  const increase = (id) => {
-    dispatch({ type: 'INCREASE', payload: id });
+  const toggleAmount = (id, operator) => {
+    dispatch({ type: 'TOGGLE_AMOUNT', payload: { id, operator } });
   };
 
-  const decrease = (id) => {
-    dispatch({ type: 'DECREASE', payload: id });
-  };
+  // const increase = (id) => {
+  //   dispatch({ type: 'INCREASE', payload: id });
+  // };
+
+  // const decrease = (id) => {
+  //   dispatch({ type: 'DECREASE', payload: id });
+  // };
 
   const fetchData = (data) => {
     fetch(data)
@@ -53,8 +57,9 @@ const AppProvider = ({ children }) => {
     <AppContext.Provider
       value={{
         ...state,
-        increase,
-        decrease,
+        // increase,
+        // decrease,
+        toggleAmount,
         removeItem,
         clearCart,
       }}
